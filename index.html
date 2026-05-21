@@ -81,6 +81,7 @@
       background: #1b1b25;
       border-radius: 20px;
       padding: 20px;
+      border: 1px solid rgba(255,255,255,0.05);
     }
 
     .type-group h3 {
@@ -190,6 +191,7 @@
       background: #1b1b25;
       padding: 25px;
       border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.05);
     }
 
     .sponsor-tag {
@@ -199,14 +201,19 @@
       letter-spacing: 1px;
     }
 
+    .sponsor-banner h3,
+    .sponsor-cta h3 {
+      margin: 10px 0;
+    }
+
     .sponsor-link,
     .sponsor-title-link {
       color: #c084fc;
       text-decoration: none;
       font-weight: bold;
+      transition: 0.2s;
       display: inline-block;
       cursor: pointer;
-      transition: 0.2s;
     }
 
     .sponsor-link:hover,
@@ -259,6 +266,10 @@
       padding-bottom: 30px;
     }
 
+    .footer-sponsor {
+      margin-top: 10px;
+    }
+
     @media (max-width: 700px) {
       .logo h1 {
         font-size: 2rem;
@@ -276,7 +287,6 @@
 </head>
 
 <body>
-
   <div id="app">
 
     <header>
@@ -297,7 +307,8 @@
         <h2>What's your hair type?</h2>
 
         <p class="subtitle">
-          Select your hair type below to receive a personalized plan.
+          Select your hair type below to receive a personalized hair growth plan,
+          hairstyle recommendations, and product picks tailored for you.
         </p>
 
         <div class="hair-type-grid">
@@ -315,6 +326,11 @@
               <button class="type-btn" onclick="selectType('1B')">
                 <span class="type-label">1B</span>
                 <span class="type-desc">Medium body</span>
+              </button>
+
+              <button class="type-btn" onclick="selectType('1C')">
+                <span class="type-label">1C</span>
+                <span class="type-desc">Coarse & thick</span>
               </button>
 
             </div>
@@ -335,6 +351,57 @@
                 <span class="type-desc">Defined S-waves</span>
               </button>
 
+              <button class="type-btn" onclick="selectType('2C')">
+                <span class="type-label">2C</span>
+                <span class="type-desc">Deep waves</span>
+              </button>
+
+            </div>
+          </div>
+
+          <div class="type-group">
+            <h3>Type 3 — Curly</h3>
+
+            <div class="type-buttons">
+
+              <button class="type-btn" onclick="selectType('3A')">
+                <span class="type-label">3A</span>
+                <span class="type-desc">Loose curls</span>
+              </button>
+
+              <button class="type-btn" onclick="selectType('3B')">
+                <span class="type-label">3B</span>
+                <span class="type-desc">Springy ringlets</span>
+              </button>
+
+              <button class="type-btn" onclick="selectType('3C')">
+                <span class="type-label">3C</span>
+                <span class="type-desc">Tight corkscrews</span>
+              </button>
+
+            </div>
+          </div>
+
+          <div class="type-group">
+            <h3>Type 4 — Coily</h3>
+
+            <div class="type-buttons">
+
+              <button class="type-btn" onclick="selectType('4A')">
+                <span class="type-label">4A</span>
+                <span class="type-desc">Defined coils</span>
+              </button>
+
+              <button class="type-btn" onclick="selectType('4B')">
+                <span class="type-label">4B</span>
+                <span class="type-desc">Z-pattern coils</span>
+              </button>
+
+              <button class="type-btn" onclick="selectType('4C')">
+                <span class="type-label">4C</span>
+                <span class="type-desc">Tight zig-zag</span>
+              </button>
+
             </div>
           </div>
 
@@ -347,12 +414,12 @@
         <div class="text-input-area">
 
           <label for="hair-description">
-            Describe your hair:
+            Describe your hair in your own words:
           </label>
 
           <textarea
             id="hair-description"
-            placeholder="My hair is wavy and frizzy..."
+            placeholder="e.g. My hair is wavy, gets frizzy in humidity, and I want to grow it longer..."
           ></textarea>
 
           <button class="primary-btn" onclick="analyzeDescription()">
@@ -365,23 +432,28 @@
 
       <section class="sponsor-banner">
 
-        <span class="sponsor-tag">Sponsored by</span>
+        <div class="sponsor-content">
 
-        <h3>
-          <a
-            class="sponsor-title-link"
-            href="https://based.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            onclick="window.open('https://based.com','_blank')"
-          >
-            Based Bodyworks
-          </a>
-        </h3>
+          <span class="sponsor-tag">Sponsored by</span>
 
-        <p>
-          Premium hair care products crafted for every texture.
-        </p>
+          <h3>
+            <a
+              href="https://based.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="sponsor-title-link"
+              onclick="window.open('https://based.com','_blank')"
+            >
+              Based Bodyworks
+            </a>
+          </h3>
+
+          <p>
+            Premium hair care products crafted for every texture.
+            Nourish your hair from root to tip.
+          </p>
+
+        </div>
 
       </section>
 
@@ -402,19 +474,23 @@
 
       <section class="sponsor-cta">
 
-        <h3>✦ Based Bodyworks Recommendation</h3>
+        <div class="sponsor-cta-content">
 
-        <p id="sponsor-product-rec"></p>
+          <h3>✦ Based Bodyworks Recommendation</h3>
 
-        <a
-          class="sponsor-link"
-          href="https://based.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          onclick="window.open('https://based.com','_blank')"
-        >
-          Shop Based Bodyworks →
-        </a>
+          <p id="sponsor-product-rec"></p>
+
+          <a
+            href="https://based.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="sponsor-link"
+            onclick="window.open('https://based.com','_blank')"
+          >
+            Shop Based Bodyworks →
+          </a>
+
+        </div>
 
       </section>
 
@@ -424,6 +500,10 @@
       <p>
         Kenzo Hair AI © 2026 | Powered by personalized hair science
       </p>
+
+      <p class="footer-sponsor">
+        Proudly partnered with <strong>Based Bodyworks</strong>
+      </p>
     </footer>
 
   </div>
@@ -431,18 +511,36 @@
   <script>
     const plans = {
       "1A": {
-        advice: "Fine straight hair benefits from lightweight products."
+        advice: "Fine straight hair benefits from lightweight products.",
+        styles: ["Layered cut", "Curtain bangs", "Soft flow"],
+        products: "Volumizing shampoo and lightweight leave-in spray."
       },
 
-      "2A": {
-        advice: "Loose waves thrive with hydration and anti-frizz care."
+      "2B": {
+        advice: "Defined waves thrive with hydration and frizz control.",
+        styles: ["Beach waves", "Wolf cut", "Textured layers"],
+        products: "Curl cream and anti-frizz conditioner."
+      },
+
+      "3C": {
+        advice: "Tight curls need moisture-rich routines.",
+        styles: ["Curly fro", "Twist out", "Layered curls"],
+        products: "Curl smoothie and deep conditioning mask."
+      },
+
+      "4C": {
+        advice: "Coily hair benefits from protective styling and deep moisture.",
+        styles: ["Protective braids", "Afro taper", "Twists"],
+        products: "Shea butter leave-in and scalp oil."
       }
     };
 
     function selectType(type) {
 
       const data = plans[type] || {
-        advice: "Healthy hydration and scalp care are recommended."
+        advice: "Maintain hydration and healthy scalp care.",
+        styles: ["Natural texture styles", "Layered cuts"],
+        products: "Hydrating shampoo and conditioner."
       };
 
       document.getElementById("landing").classList.add("hidden");
@@ -454,13 +552,26 @@
         <h3>${type} Hair Analysis</h3>
 
         <p>
-          <strong>Advice:</strong><br>
+          <strong>Hair Growth Advice:</strong><br>
           ${data.advice}
+        </p>
+
+        <br>
+
+        <p><strong>Recommended Hairstyles:</strong></p>
+
+        <ul>
+          ${data.styles.map(style => `<li>${style}</li>`).join("")}
+        </ul>
+
+        <p>
+          <strong>Product Recommendations:</strong><br>
+          ${data.products}
         </p>
       `;
 
       document.getElementById("sponsor-product-rec").innerText =
-        "Based Bodyworks recommends their hydration collection.";
+        "Based Bodyworks recommends their premium hydration collection for your hair type.";
     }
 
     function analyzeDescription() {
@@ -480,22 +591,34 @@
         "AI Analysis";
 
       document.getElementById("ai-response").innerHTML = `
-        <h3>Custom Hair Analysis</h3>
+        <h3>Personalized Hair Analysis</h3>
 
         <p>
-          "${desc}"
+          Based on your description:
+        </p>
+
+        <p>
+          <em>"${desc}"</em>
         </p>
 
         <br>
 
         <p>
           Your hair would benefit from hydration,
-          scalp nourishment, and reduced heat damage.
+          scalp care, reduced heat damage,
+          and texture-supporting products.
         </p>
+
+        <ul>
+          <li>Hydration support</li>
+          <li>Frizz control</li>
+          <li>Healthy growth maintenance</li>
+          <li>Scalp nourishment</li>
+        </ul>
       `;
 
       document.getElementById("sponsor-product-rec").innerText =
-        "Based Bodyworks recommends their growth serum.";
+        "Based Bodyworks recommends their strengthening growth serum.";
     }
 
     function goBack() {
