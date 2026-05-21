@@ -4,101 +4,397 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kenzo Hair AI</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #0f0f14, #181824);
+      color: white;
+      min-height: 100vh;
+    }
+
+    #app {
+      max-width: 1200px;
+      margin: auto;
+      padding: 25px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      font-size: 2rem;
+      color: #c084fc;
+    }
+
+    .logo h1 {
+      font-size: 3rem;
+      color: #c084fc;
+    }
+
+    .tagline {
+      color: #aaa;
+      margin-top: 10px;
+    }
+
+    .input-section {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 30px;
+      border-radius: 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      color: #bbb;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .hair-type-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .type-group {
+      background: #1b1b25;
+      border-radius: 20px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .type-group h3 {
+      margin-bottom: 18px;
+      color: #d8b4fe;
+    }
+
+    .type-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .type-btn {
+      background: #2d1f44;
+      border: none;
+      color: white;
+      padding: 16px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: 0.25s;
+      text-align: left;
+    }
+
+    .type-btn:hover {
+      background: #7c3aed;
+      transform: translateY(-2px);
+    }
+
+    .type-label {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .type-desc {
+      font-size: 0.9rem;
+      color: #ddd;
+    }
+
+    .or-divider {
+      text-align: center;
+      margin: 35px 0;
+      position: relative;
+    }
+
+    .or-divider span {
+      background: #181824;
+      padding: 0 15px;
+      color: #888;
+    }
+
+    .or-divider::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      z-index: -1;
+    }
+
+    .text-input-area label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 140px;
+      background: #1b1b25;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 18px;
+      color: white;
+      resize: vertical;
+      font-size: 1rem;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: #a855f7;
+    }
+
+    .primary-btn {
+      margin-top: 18px;
+      background: linear-gradient(90deg, #9333ea, #c084fc);
+      border: none;
+      color: white;
+      padding: 14px 24px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.25s;
+    }
+
+    .primary-btn:hover {
+      transform: scale(1.03);
+    }
+
+    .sponsor-banner,
+    .sponsor-cta,
+    .ai-response {
+      margin-top: 25px;
+      background: #1b1b25;
+      padding: 25px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .sponsor-tag {
+      color: #c084fc;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .sponsor-banner h3,
+    .sponsor-cta h3 {
+      margin: 10px 0;
+    }
+
+    .sponsor-link,
+    .sponsor-title-link {
+      color: #c084fc;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .sponsor-link:hover,
+    .sponsor-title-link:hover {
+      color: #f5d0fe;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .back-btn {
+      background: transparent;
+      border: none;
+      color: #c084fc;
+      margin-bottom: 20px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .results-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .hair-type-badge {
+      background: #7c3aed;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: bold;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      color: #777;
+      padding-bottom: 30px;
+    }
+
+    .footer-sponsor {
+      margin-top: 10px;
+    }
+
+    @media (max-width: 700px) {
+      .logo h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .input-section {
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <div id="app">
-    <!-- Header -->
+
     <header>
       <div class="logo">
         <span class="logo-icon">✦</span>
         <h1>Kenzo Hair AI</h1>
       </div>
-      <p class="tagline">Your personalized hair growth &amp; styling advisor</p>
+
+      <p class="tagline">
+        Your personalized hair growth & styling advisor
+      </p>
     </header>
 
-    <!-- Landing / Input Section -->
     <main id="landing">
+
       <section class="input-section">
+
         <h2>What's your hair type?</h2>
-        <p class="subtitle">Select your hair type below to receive a personalized hair growth plan, hairstyle recommendations, and product picks — all tailored just for you.</p>
+
+        <p class="subtitle">
+          Select your hair type below to receive a personalized hair growth
+          plan, hairstyle recommendations, and product picks tailored for you.
+        </p>
 
         <div class="hair-type-grid">
-          <!-- Type 1: Straight -->
+
           <div class="type-group">
             <h3>Type 1 — Straight</h3>
+
             <div class="type-buttons">
-              <button class="type-btn" data-type="1a" onclick="selectType('1a')">
+              <button class="type-btn" onclick="selectType('1A')">
                 <span class="type-label">1A</span>
                 <span class="type-desc">Fine & flat</span>
               </button>
-              <button class="type-btn" data-type="1b" onclick="selectType('1b')">
+
+              <button class="type-btn" onclick="selectType('1B')">
                 <span class="type-label">1B</span>
                 <span class="type-desc">Medium body</span>
               </button>
-              <button class="type-btn" data-type="1c" onclick="selectType('1c')">
+
+              <button class="type-btn" onclick="selectType('1C')">
                 <span class="type-label">1C</span>
                 <span class="type-desc">Coarse & thick</span>
               </button>
             </div>
           </div>
 
-          <!-- Type 2: Wavy -->
           <div class="type-group">
             <h3>Type 2 — Wavy</h3>
+
             <div class="type-buttons">
-              <button class="type-btn" data-type="2a" onclick="selectType('2a')">
+              <button class="type-btn" onclick="selectType('2A')">
                 <span class="type-label">2A</span>
                 <span class="type-desc">Loose waves</span>
               </button>
-              <button class="type-btn" data-type="2b" onclick="selectType('2b')">
+
+              <button class="type-btn" onclick="selectType('2B')">
                 <span class="type-label">2B</span>
                 <span class="type-desc">Defined S-waves</span>
               </button>
-              <button class="type-btn" data-type="2c" onclick="selectType('2c')">
+
+              <button class="type-btn" onclick="selectType('2C')">
                 <span class="type-label">2C</span>
                 <span class="type-desc">Deep waves</span>
               </button>
             </div>
           </div>
 
-          <!-- Type 3: Curly -->
           <div class="type-group">
             <h3>Type 3 — Curly</h3>
+
             <div class="type-buttons">
-              <button class="type-btn" data-type="3a" onclick="selectType('3a')">
+              <button class="type-btn" onclick="selectType('3A')">
                 <span class="type-label">3A</span>
                 <span class="type-desc">Loose curls</span>
               </button>
-              <button class="type-btn" data-type="3b" onclick="selectType('3b')">
+
+              <button class="type-btn" onclick="selectType('3B')">
                 <span class="type-label">3B</span>
                 <span class="type-desc">Springy ringlets</span>
               </button>
-              <button class="type-btn" data-type="3c" onclick="selectType('3c')">
+
+              <button class="type-btn" onclick="selectType('3C')">
                 <span class="type-label">3C</span>
                 <span class="type-desc">Tight corkscrews</span>
               </button>
             </div>
           </div>
 
-          <!-- Type 4: Coily -->
           <div class="type-group">
             <h3>Type 4 — Coily</h3>
+
             <div class="type-buttons">
-              <button class="type-btn" data-type="4a" onclick="selectType('4a')">
+              <button class="type-btn" onclick="selectType('4A')">
                 <span class="type-label">4A</span>
                 <span class="type-desc">Defined coils</span>
               </button>
-              <button class="type-btn" data-type="4b" onclick="selectType('4b')">
+
+              <button class="type-btn" onclick="selectType('4B')">
                 <span class="type-label">4B</span>
                 <span class="type-desc">Z-pattern coils</span>
               </button>
-              <button class="type-btn" data-type="4c" onclick="selectType('4c')">
+
+              <button class="type-btn" onclick="selectType('4C')">
                 <span class="type-label">4C</span>
                 <span class="type-desc">Tight zig-zag</span>
               </button>
             </div>
           </div>
+
         </div>
 
         <div class="or-divider">
@@ -106,56 +402,208 @@
         </div>
 
         <div class="text-input-area">
-          <label for="hair-description">Describe your hair in your own words:</label>
-          <textarea id="hair-description" placeholder="e.g. My hair is wavy, gets frizzy in humidity, and I want to grow it longer..."></textarea>
-          <button class="primary-btn" onclick="analyzeDescription()">Analyze My Hair</button>
+          <label for="hair-description">
+            Describe your hair in your own words:
+          </label>
+
+          <textarea
+            id="hair-description"
+            placeholder="e.g. My hair is wavy, gets frizzy in humidity, and I want to grow it longer..."
+          ></textarea>
+
+          <button class="primary-btn" onclick="analyzeDescription()">
+            Analyze My Hair
+          </button>
         </div>
+
       </section>
 
-      <!-- Sponsor Banner -->
       <section class="sponsor-banner">
         <div class="sponsor-content">
+
           <span class="sponsor-tag">Sponsored by</span>
-          <h3>Based Bodyworks</h3>
-          <p>Premium hair care products crafted for every texture. Nourish your hair from root to tip.</p>
+
+          <h3>
+            <a
+              href="https://based.com"
+              target="_blank"
+              class="sponsor-title-link"
+            >
+              Based Bodyworks
+            </a>
+          </h3>
+
+          <p>
+            Premium hair care products crafted for every texture.
+            Nourish your hair from root to tip.
+          </p>
+
         </div>
       </section>
+
     </main>
 
-    <!-- Results Section (hidden initially) -->
     <main id="results" class="hidden">
-      <button class="back-btn" onclick="goBack()">← Try Another Hair Type</button>
+
+      <button class="back-btn" onclick="goBack()">
+        ← Try Another Hair Type
+      </button>
 
       <div class="results-header">
         <h2>Your Personalized Plan</h2>
         <div class="hair-type-badge" id="result-badge"></div>
       </div>
 
-      <!-- AI Response Container -->
-      <div id="ai-response" class="ai-response">
-        <div class="typing-indicator" id="typing">
-          <span></span><span></span><span></span>
-        </div>
-      </div>
+      <div id="ai-response" class="ai-response"></div>
 
-      <!-- Sponsor CTA in results -->
-      <section class="sponsor-cta" id="sponsor-cta">
+      <section class="sponsor-cta">
         <div class="sponsor-cta-content">
+
           <h3>✦ Based Bodyworks Recommendation</h3>
+
           <p id="sponsor-product-rec"></p>
-          <a href="#" class="sponsor-link">Shop Based Bodyworks →</a>
+
+          <a
+            href="https://based.com"
+            target="_blank"
+            class="sponsor-link"
+          >
+            Shop Based Bodyworks →
+          </a>
+
         </div>
       </section>
+
     </main>
 
-    <!-- Footer -->
     <footer>
-      <p>Kenzo Hair AI &copy; 2026 &mdash; Powered by personalized hair science</p>
-      <p class="footer-sponsor">Proudly partnered with <strong>Based Bodyworks</strong></p>
+      <p>Kenzo Hair AI &copy; 2026 | Powered by personalized hair science</p>
+
+      <p class="footer-sponsor">
+        Proudly partnered with <strong>Based Bodyworks</strong>
+      </p>
     </footer>
+
   </div>
 
-  <script src="hairdata.js"></script>
-  <script src="app.js"></script>
+  <script>
+    const plans = {
+      "1A": {
+        advice: "Fine straight hair benefits from lightweight products.",
+        styles: ["Layered cut", "Curtain bangs", "Soft flow"],
+        products: "Volumizing shampoo and lightweight leave-in spray."
+      },
+
+      "2B": {
+        advice: "Defined waves thrive with hydration and frizz control.",
+        styles: ["Beach waves", "Wolf cut", "Textured layers"],
+        products: "Curl cream and anti-frizz conditioner."
+      },
+
+      "3C": {
+        advice: "Tight curls need moisture-rich routines.",
+        styles: ["Curly fro", "Twist out", "Layered curls"],
+        products: "Curl smoothie and deep conditioning mask."
+      },
+
+      "4C": {
+        advice: "Coily hair benefits from protective styling and deep moisture.",
+        styles: ["Protective braids", "Afro taper", "Twists"],
+        products: "Shea butter leave-in and scalp oil."
+      }
+    };
+
+    function selectType(type) {
+
+      const data = plans[type] || {
+        advice: "Maintain hydration and healthy scalp care.",
+        styles: ["Natural texture styles", "Layered cuts"],
+        products: "Hydrating shampoo and conditioner."
+      };
+
+      document.getElementById("landing").classList.add("hidden");
+      document.getElementById("results").classList.remove("hidden");
+
+      document.getElementById("result-badge").innerText = type;
+
+      document.getElementById("ai-response").innerHTML = `
+        <h3>${type} Hair Analysis</h3>
+
+        <p>
+          <strong>Hair Growth Advice:</strong><br>
+          ${data.advice}
+        </p>
+
+        <br>
+
+        <p><strong>Recommended Hairstyles:</strong></p>
+
+        <ul>
+          ${data.styles.map(style => `<li>${style}</li>`).join("")}
+        </ul>
+
+        <p>
+          <strong>Product Recommendations:</strong><br>
+          ${data.products}
+        </p>
+      `;
+
+      document.getElementById("sponsor-product-rec").innerText =
+        "Based Bodyworks recommends their premium hydration collection for your hair type.";
+    }
+
+    function analyzeDescription() {
+
+      const desc =
+        document.getElementById("hair-description").value;
+
+      if (!desc.trim()) {
+        alert("Please describe your hair first.");
+        return;
+      }
+
+      document.getElementById("landing").classList.add("hidden");
+      document.getElementById("results").classList.remove("hidden");
+
+      document.getElementById("result-badge").innerText =
+        "AI Analysis";
+
+      document.getElementById("ai-response").innerHTML = `
+        <h3>Personalized Hair Analysis</h3>
+
+        <p>
+          Based on your description:
+        </p>
+
+        <p>
+          <em>"${desc}"</em>
+        </p>
+
+        <br>
+
+        <p>
+          Your hair would benefit from hydration,
+          scalp care, reduced heat damage,
+          and texture-supporting products.
+        </p>
+
+        <ul>
+          <li>Hydration support</li>
+          <li>Frizz control</li>
+          <li>Healthy growth maintenance</li>
+          <li>Scalp nourishment</li>
+        </ul>
+      `;
+
+      document.getElementById("sponsor-product-rec").innerText =
+        "Based Bodyworks recommends their strengthening growth serum.";
+    }
+
+    function goBack() {
+      document.getElementById("landing").classList.remove("hidden");
+      document.getElementById("results").classList.add("hidden");
+    }
+  </script>
+
 </body>
 </html>
